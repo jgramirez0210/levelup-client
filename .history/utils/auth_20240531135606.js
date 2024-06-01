@@ -3,7 +3,7 @@ import 'firebase/auth';
 import { clientCredentials } from './client';
 
 const checkUser = (uid) => new Promise((resolve, reject) => {
-  const url = new URL('checkuser',  process.env.NEXT_PUBLIC_DATABASE_URL).href;
+  const url = new URL('checkuser', clientCredentials.databaseURL).href;
 
   fetch(url, {
     method: 'POST',
@@ -19,7 +19,7 @@ const checkUser = (uid) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 const registerUser = (userInfo) => new Promise((resolve, reject) => {
-  const url = new URL('register',  process.env.NEXT_PUBLIC_DATABASE_URL).href;
+  const url = new URL('register', clientCredentials.databaseURL).href;
 
   fetch(url, {
     method: 'POST',

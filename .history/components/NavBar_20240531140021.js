@@ -26,7 +26,7 @@ export default function NavBar() {
             <Link passHref href="/event">
               <Nav.Link>Events</Nav.Link>
             </Link>
-            <Link passHref href="/games/new">
+            <Link passHref href="/add-game">
               <Nav.Link>Add New Game</Nav.Link>
             </Link>
             <Button variant="danger" onClick={signOut}>
