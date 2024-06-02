@@ -13,8 +13,8 @@ function EventPage() {
   return (
     <article className="events">
       <h1>Events</h1>
-      <Link href="/events/new" passHref>
-        <button type="button">Register New Event</button>
+      <Link href="/EventForm" passHref>
+        <button type="button">Add Event</button>
       </Link>
       {events.map((event) => (
         <section key={`event--${event.id}`} className="event">
