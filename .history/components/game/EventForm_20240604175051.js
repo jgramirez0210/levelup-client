@@ -65,12 +65,12 @@ const EventForm = ({ user }) => {
     e.preventDefault();
 
     const event = {
+      id: currentEvent.id,
       description: currentEvent.description,
       date: currentEvent.date,
       time: currentEvent.time,
       gameId: currentEvent.game_id,
       organizer_id: currentEvent.organizer_id,
-      userId: user?.uid,
     };
 
     console.warn('currentEvent.id', currentEvent.id);
@@ -86,7 +86,6 @@ const EventForm = ({ user }) => {
         });
     } else {
       // If no id is present, create a new game
-      console.warn('Event being sent to create API:', event);
       createEvent(event)
         .then(() => {
           router.push('/event');
@@ -96,7 +95,6 @@ const EventForm = ({ user }) => {
         });
     }
   };
-
   return (
     <>
       <Form onSubmit={handleSubmit}>
@@ -128,7 +126,7 @@ const EventForm = ({ user }) => {
             value={currentEvent.organizer_id}
             onChange={handleChange}
           >
-            {gamers.map((organizerItem) => (
+            {gamers.map((organizerItem) => ( // Use gamers instead of event
               <option key={organizerItem.id} value={organizerItem.id}>
                 {organizerItem.bio}
               </option>

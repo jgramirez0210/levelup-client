@@ -2,22 +2,20 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Card, Button } from 'react-bootstrap';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { deleteGame } from './api/gameData'; // Changed from deleteReview
 
 const GameCard = ({
   title,
   maker,
   numberOfPlayers,
   skillLevel,
-  onUpdate,
+  id,
+  deleteReview, // Add this prop
+  reviewObj, // Add this prop
+  onUpdate, // Add this prop
 }) => {
-  const router = useRouter();
-  const { id } = router.query; // Get the id from the URL
-
-  const deleteThisGame = () => {
-    if (window.confirm(`Delete ${title}?`)) {
-      deleteGame(id).then(() => { // Use the id from the URL
+  const deleteThisReview = () => {
+    if (window.confirm(`Delete ${reviewObj.address}?`)) {
+      deleteReview(reviewObj.firebaseKey).then(() => {
         onUpdate();
       });
     }
@@ -37,7 +35,7 @@ const GameCard = ({
       <Link href={`/games/${id}`} passHref>
         <Button>View Game</Button>
       </Link>
-      <Button onClick={deleteThisGame}>Delete Game</Button> {/* Changed from Delete Review to Delete Game */}
+      <Button onClick={deleteThisReview}>Delete Review</Button> {/* Add this line */}
     </Card>
   );
 };
@@ -45,9 +43,12 @@ const GameCard = ({
 GameCard.propTypes = {
   title: PropTypes.string.isRequired,
   maker: PropTypes.string.isRequired,
-  numberOfPlayers: PropTypes.string.isRequired,
-  skillLevel: PropTypes.string.isRequired,
-  onUpdate: PropTypes.func.isRequired,
+  numberOfPlayers: PropTypes.number.isRequired,
+  skillLevel: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
+  deleteReview: PropTypes.func.isRequired, // Add this line
+  reviewObj: PropTypes.object.isRequired, // Add this line
+  onUpdate: PropTypes.func.isRequired, // Add this line
 };
 
 export default GameCard;

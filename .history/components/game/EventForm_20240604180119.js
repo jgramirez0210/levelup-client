@@ -65,10 +65,11 @@ const EventForm = ({ user }) => {
     e.preventDefault();
 
     const event = {
+      id: currentEvent.id,
       description: currentEvent.description,
       date: currentEvent.date,
       time: currentEvent.time,
-      gameId: currentEvent.game_id,
+      gameId: games.find((game) => game.id === currentEvent.game_id), // Change 'game' to 'gameId' and ensure it's a 'Game' instance
       organizer_id: currentEvent.organizer_id,
       userId: user?.uid,
     };
@@ -86,7 +87,6 @@ const EventForm = ({ user }) => {
         });
     } else {
       // If no id is present, create a new game
-      console.warn('Event being sent to create API:', event);
       createEvent(event)
         .then(() => {
           router.push('/event');

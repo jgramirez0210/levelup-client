@@ -19,14 +19,16 @@ export default function Game() {
         });
     }
   }, [id]);
-
+  if (game) {
+    console.warn(game);
+  }
   return game ? (
-    <GameCard
-      title={game.title}
-      maker={game.maker}
-      numberOfPlayers={game.number_of_players}
-      skillLevel={game.skill_level}
-      id={game.id}
+    <GameCard 
+      title={game.title} 
+      maker={game.maker} 
+      numberOfPlayers={game.number_of_players} 
+      skillLevel={game.skill_level} 
+      id={game.id} 
       onUpdate={updateGame} // Replace updateGames with your actual update function
     />
   ) : (

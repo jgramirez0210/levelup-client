@@ -65,10 +65,11 @@ const EventForm = ({ user }) => {
     e.preventDefault();
 
     const event = {
+      id: currentEvent.id,
       description: currentEvent.description,
       date: currentEvent.date,
       time: currentEvent.time,
-      gameId: currentEvent.game_id,
+      game_id: currentEvent.game_id, // Changed 'game' to 'game_id'
       organizer_id: currentEvent.organizer_id,
       userId: user?.uid,
     };

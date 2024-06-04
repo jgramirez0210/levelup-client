@@ -65,12 +65,13 @@ const EventForm = ({ user }) => {
     e.preventDefault();
 
     const event = {
+      id: currentEvent.id,
       description: currentEvent.description,
       date: currentEvent.date,
       time: currentEvent.time,
       gameId: currentEvent.game_id,
       organizer_id: currentEvent.organizer_id,
-      userId: user?.uid,
+      userId: user?.uid, // Add 'userId' field
     };
 
     console.warn('currentEvent.id', currentEvent.id);
@@ -86,7 +87,6 @@ const EventForm = ({ user }) => {
         });
     } else {
       // If no id is present, create a new game
-      console.warn('Event being sent to create API:', event);
       createEvent(event)
         .then(() => {
           router.push('/event');

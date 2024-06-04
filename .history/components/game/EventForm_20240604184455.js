@@ -68,7 +68,7 @@ const EventForm = ({ user }) => {
       description: currentEvent.description,
       date: currentEvent.date,
       time: currentEvent.time,
-      gameId: currentEvent.game_id,
+      game_id: currentEvent.game_id,
       organizer_id: currentEvent.organizer_id,
       userId: user?.uid,
     };

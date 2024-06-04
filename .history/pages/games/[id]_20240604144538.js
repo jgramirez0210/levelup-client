@@ -19,7 +19,9 @@ export default function Game() {
         });
     }
   }, [id]);
-
+  if (game) {
+    console.warn(game);
+  }
   return game ? (
     <GameCard
       title={game.title}

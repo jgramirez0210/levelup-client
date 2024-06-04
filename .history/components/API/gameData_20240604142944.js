@@ -96,27 +96,15 @@ const updateGame = (id, payload) => new Promise((resolve, reject) => {
 
 // DELETE GAME
 const deleteGame = (id) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}games/${id}`, {
+  fetch(`${endpoint}/games/${id}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
     },
   })
-    .then((response) => {
-      if (!response.ok) {
-        if (response.status === 404) {
-          reject(new Error('Game does not exist'));
-        } else {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-      }
-      // Check if the response is empty
-      const contentType = response.headers.get('content-type');
-      if (contentType && contentType.indexOf('application/json') !== -1) {
-        return response.json().then((data) => resolve(data));
-      }
-      resolve();
-      return null; // Add this line
+    .then((response) => response.json())
+    .then((data) => {
+      resolve(data);
     })
     .catch(reject);
 });
