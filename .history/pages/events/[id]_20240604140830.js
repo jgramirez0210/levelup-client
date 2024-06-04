@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { getEvent } from '../../components/api/eventData';
-import EventCard from '../../components/EventCard';
+import EventCard from '../../components/game/EventCard'; // Import EventCard
 
 export default function Game() {
   const router = useRouter();

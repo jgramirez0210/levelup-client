@@ -1,8 +1,8 @@
-// [id].js
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { Card } from 'react-bootstrap';
 import { getEvent } from '../../components/api/eventData';
-import EventCard from '../../components/EventCard';
+import EventForm from '../../components/game/EventForm';
 
 export default function Game() {
   const router = useRouter();
@@ -12,8 +12,8 @@ export default function Game() {
   useEffect(() => {
     if (id) {
       getEvent(id)
-        .then((eventData) => {
-          setEvent(eventData);
+        .then((gameData) => {
+          setEvent(gameData);
         })
         .catch((error) => {
           console.error(error);
@@ -22,7 +22,10 @@ export default function Game() {
   }, [id]);
 
   return event ? (
-    <EventCard {...event} /> // Spread the event object into separate props
+    <Card className="text-center">
+      {console.warn(`Sending event with id: ${event.id} to EventCard`)}
+      <EventForm id={event.id} event={event} />
+    </Card>
   ) : (
     <div>Loading...</div>
   );
