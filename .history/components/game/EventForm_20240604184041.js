@@ -56,7 +56,7 @@ const EventForm = ({ user }) => {
     setCurrentEvent((prevEvent) => ({
       ...prevEvent,
       [e.target.name]: e.target.value,
-      // Include 'uid' only if the event is being created (i.e., 'id' is not present)
+      game_id: e.target.name === 'game' ? e.target.value : prevEvent.game_id,
       uid: !prevEvent.id ? user?.uid : prevEvent.uid,
     }));
   };
@@ -65,10 +65,11 @@ const EventForm = ({ user }) => {
     e.preventDefault();
 
     const event = {
+      id: currentEvent.id,
       description: currentEvent.description,
       date: currentEvent.date,
       time: currentEvent.time,
-      gameId: currentEvent.game_id,
+      game: games.find((game) => game.id === currentEvent.game_id),
       organizer_id: currentEvent.organizer_id,
       userId: user?.uid,
     };

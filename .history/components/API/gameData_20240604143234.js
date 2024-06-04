@@ -104,11 +104,7 @@ const deleteGame = (id) => new Promise((resolve, reject) => {
   })
     .then((response) => {
       if (!response.ok) {
-        if (response.status === 404) {
-          reject(new Error('Game does not exist'));
-        } else {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
       // Check if the response is empty
       const contentType = response.headers.get('content-type');
@@ -116,7 +112,6 @@ const deleteGame = (id) => new Promise((resolve, reject) => {
         return response.json().then((data) => resolve(data));
       }
       resolve();
-      return null; // Add this line
     })
     .catch(reject);
 });

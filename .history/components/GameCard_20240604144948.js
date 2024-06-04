@@ -47,6 +47,8 @@ GameCard.propTypes = {
   maker: PropTypes.string.isRequired,
   numberOfPlayers: PropTypes.string.isRequired,
   skillLevel: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+
   onUpdate: PropTypes.func.isRequired,
 };
 

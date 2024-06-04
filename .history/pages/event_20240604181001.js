@@ -18,7 +18,7 @@ function EventPage() {
       <Link href="/events/new" passHref>
         <button type="button">Register New Event</button>
       </Link>
-      {Array.isArray(events) && events.map((event) => (
+      {events.map((event) => (
         <section key={`event--${event.id}`} className="event">
           <EventCard
             id={event.id}

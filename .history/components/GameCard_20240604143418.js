@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Card, Button } from 'react-bootstrap';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { deleteGame } from './api/gameData'; // Changed from deleteReview
 
 const GameCard = ({
@@ -10,14 +9,11 @@ const GameCard = ({
   maker,
   numberOfPlayers,
   skillLevel,
-  onUpdate,
+  id,
 }) => {
-  const router = useRouter();
-  const { id } = router.query; // Get the id from the URL
-
   const deleteThisGame = () => {
-    if (window.confirm(`Delete ${title}?`)) {
-      deleteGame(id).then(() => { // Use the id from the URL
+    if (window.confirm(`Delete ${title}?`)) { // Changed from GameCard.id to title
+      deleteGame(id).then(() => { // Changed from deleteReview(GameCard.id) to deleteGame(id)
         onUpdate();
       });
     }
@@ -45,8 +41,9 @@ const GameCard = ({
 GameCard.propTypes = {
   title: PropTypes.string.isRequired,
   maker: PropTypes.string.isRequired,
-  numberOfPlayers: PropTypes.string.isRequired,
-  skillLevel: PropTypes.string.isRequired,
+  numberOfPlayers: PropTypes.number.isRequired,
+  skillLevel: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   onUpdate: PropTypes.func.isRequired,
 };
 

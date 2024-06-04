@@ -2,22 +2,19 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Card, Button } from 'react-bootstrap';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { deleteGame } from './api/gameData'; // Changed from deleteReview
 
 const GameCard = ({
   title,
   maker,
   numberOfPlayers,
-  skillLevel,
-  onUpdate,
+  skill_level,
+  id,
+  onUpdate, // This function should trigger a re-render to update the list of games
 }) => {
-  const router = useRouter();
-  const { id } = router.query; // Get the id from the URL
-
   const deleteThisGame = () => {
-    if (window.confirm(`Delete ${title}?`)) {
-      deleteGame(id).then(() => { // Use the id from the URL
+    if (window.confirm(`Delete ${title}?`)) { // Changed from GameCard.id to title
+      deleteGame(id).then(() => { // Changed from deleteReview(GameCard.id) to deleteGame(id)
         onUpdate();
       });
     }
@@ -28,9 +25,9 @@ const GameCard = ({
       <Card.Header>{title}</Card.Header>
       <Card.Body>
         <Card.Title>By: {maker}</Card.Title>
-        <Card.Text>{numberOfPlayers} players needed</Card.Text>
+        <Card.Text>{number_of_layers} players needed</Card.Text>
       </Card.Body>
-      <Card.Footer className="text-muted">Skill Level: {skillLevel}</Card.Footer>
+      <Card.Footer className="text-muted">Skill Level: {skill_level}</Card.Footer>
       <Link href={`/games/edit/${id}`} passHref>
         <Button>Edit Game</Button>
       </Link>
@@ -45,8 +42,9 @@ const GameCard = ({
 GameCard.propTypes = {
   title: PropTypes.string.isRequired,
   maker: PropTypes.string.isRequired,
-  numberOfPlayers: PropTypes.string.isRequired,
-  skillLevel: PropTypes.string.isRequired,
+  numberOfPlayers: PropTypes.number.isRequired,
+  skill_level: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   onUpdate: PropTypes.func.isRequired,
 };
 

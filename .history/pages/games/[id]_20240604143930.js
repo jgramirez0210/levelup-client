@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import GameCard from '../../components/GameCard';
-import { getGame, updateGame } from '../../components/api/gameData';
+import { getGame } from '../../components/api/gameData';
 
 export default function Game() {
   const router = useRouter();
@@ -19,16 +19,9 @@ export default function Game() {
         });
     }
   }, [id]);
-
   return game ? (
-    <GameCard
-      title={game.title}
-      maker={game.maker}
-      numberOfPlayers={game.number_of_players}
-      skillLevel={game.skill_level}
-      id={game.id}
-      onUpdate={updateGame} // Replace updateGames with your actual update function
-    />
+    console.warn(game)
+    <GameCard {...game} /> // Spread the event object into separate props
   ) : (
     <div>Loading...</div>
   );
