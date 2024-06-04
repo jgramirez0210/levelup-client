@@ -143,6 +143,3 @@ EventForm.propTypes = {
 };
 
 export default EventForm;
-
-// TODO: FIX VIEW EVENT NOT SHOWING ANYTHING
-// TODO: FIX AFTER EDIT AND CREATION ROUTING

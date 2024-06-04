@@ -77,7 +77,7 @@ const EventForm = ({ user }) => {
       // If an id is present, update the game
       updateEvent(id, event)
         .then(() => {
-          router.push(`/events/${id}`);
+          router.push(`/events${id}`);
         })
         .catch((error) => {
           console.error(error);
@@ -143,6 +143,3 @@ EventForm.propTypes = {
 };
 
 export default EventForm;
-
-// TODO: FIX VIEW EVENT NOT SHOWING ANYTHING
-// TODO: FIX AFTER EDIT AND CREATION ROUTING

@@ -64,7 +64,7 @@ const EventForm = ({ user }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const event = {
+    const newEvent = {
       id: currentEvent.id,
       description: currentEvent.description,
       date: currentEvent.date,
@@ -84,9 +84,9 @@ const EventForm = ({ user }) => {
         });
     } else {
       // If no id is present, create a new game
-      createEvent(event)
+      createEvent(newEvent)
         .then(() => {
-          router.push('/event');
+          router.push('/');
         })
         .catch((error) => {
           console.error(error);
@@ -143,6 +143,3 @@ EventForm.propTypes = {
 };
 
 export default EventForm;
-
-// TODO: FIX VIEW EVENT NOT SHOWING ANYTHING
-// TODO: FIX AFTER EDIT AND CREATION ROUTING

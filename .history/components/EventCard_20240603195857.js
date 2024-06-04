@@ -13,6 +13,8 @@ const EventCard = ({
 }) => {
   const datetime = new Date(`${date}T${time}`);
 
+  console.warn(`Rendering EventCard with id: ${id}`);
+
   return (
     <Card className="text-center">
       <Card.Header>{game}</Card.Header>

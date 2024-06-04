@@ -4,14 +4,16 @@ import { Card, Button } from 'react-bootstrap';
 import Link from 'next/link';
 
 const EventCard = ({
-  id,
   game,
   description,
   date,
   time,
   organizer,
+  id,
 }) => {
   const datetime = new Date(`${date}T${time}`);
+
+  console.warn(`Rendering EventCard with id: ${id}`);
 
   return (
     <Card className="text-center">
@@ -22,10 +24,7 @@ const EventCard = ({
       </Card.Body>
       <Card.Footer className="text-muted">Organizer: {organizer}</Card.Footer>
       <Link href={`/events/${id}`} passHref>
-        <Button>Edit Events</Button>
-      </Link>
-      <Link href={`/events/${id}`} passHref>
-        <Button>View Event</Button>
+        <Button>Edit Game</Button>
       </Link>
     </Card>
   );

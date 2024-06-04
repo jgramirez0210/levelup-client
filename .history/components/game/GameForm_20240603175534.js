@@ -1,13 +1,12 @@
-// Importing necessary modules and functions
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import {
   createGame, getGameTypes, getGame, updateGame,
+
 } from '../api/gameData';
 
-// Initial state for the form
 const initialState = {
   skill_level: 'Beginner',
   number_of_players: '',
@@ -16,34 +15,30 @@ const initialState = {
   gameType: 1,
 };
 
-// The GameForm component
 const GameForm = ({ user }) => {
-  // State for game types and the current game
   const [gameTypes, setGameTypes] = useState([]);
   const [currentGame, setCurrentGame] = useState(initialState);
-
-  // Getting the router and query object
   const router = useRouter();
   const { query } = useRouter();
   const { id } = query;
 
-  // useEffect hook to fetch the game data and game types
+  // First useEffect to fetch the game data and game types
   useEffect(() => {
     if (id) {
-      // If an id is present, fetch the game and set it to currentGame
+      // Fetch the game and set it to currentGame
       getGame(id)
         .then((game) => {
+          console.warn('Game', game);
           setCurrentGame(game);
         })
         .catch((error) => {
           console.error(error);
         });
     } else {
-      // If no id is present, set currentGame to initialState
+      // Set currentGame to initialState
       setCurrentGame(initialState);
     }
 
-    // Fetch the game types
     getGameTypes()
       .then((types) => {
         setGameTypes(types);
@@ -53,12 +48,11 @@ const GameForm = ({ user }) => {
       });
   }, [id, user.uid]);
 
-  // useEffect hook to log the currentGame state
+  // Second useEffect to log the currentGame state
   useEffect(() => {
     console.warn('Current Game', currentGame);
   }, [currentGame]);
 
-  // Function to handle form field changes
   const handleChange = (e) => {
     setCurrentGame({
       ...currentGame,
@@ -66,11 +60,9 @@ const GameForm = ({ user }) => {
     });
   };
 
-  // Function to handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Constructing the game object
     const game = {
       maker: currentGame.maker,
       title: currentGame.title,
@@ -81,16 +73,16 @@ const GameForm = ({ user }) => {
     };
 
     if (id) {
-      // If an id is present, update the game
+      // Update the game
       updateGame(id, game)
         .then(() => {
-          router.push(`/games/${id}`);
+          router.push(`/${id}`);
         })
         .catch((error) => {
           console.error(error);
         });
     } else {
-      // If no id is present, create a new game
+      // Create the game
       createGame(game)
         .then(() => {
           router.push('/');
@@ -159,7 +151,6 @@ const GameForm = ({ user }) => {
   );
 };
 
-// Prop types for the GameForm component
 GameForm.propTypes = {
   user: PropTypes.shape({
     uid: PropTypes.string.isRequired,

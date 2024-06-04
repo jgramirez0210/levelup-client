@@ -10,13 +10,14 @@ function EventPage() {
     getEvents().then((data) => setEvents(data));
   }, []);
 
-  return (
-    <article className="events">
-      <h1>Events</h1>
-      <Link href="/events/new" passHref>
-        <button type="button">Register New Event</button>
-      </Link>
-      {events.map((event) => (
+return (
+  <article className="events">
+    <h1>Events</h1>
+    <Link href="/events/new" passHref>
+      <button type="button">Register New Event</button>
+    </Link>
+    {events.map((event) => {
+      return (
         <section key={`event--${event.id}`} className="event">
           <EventCard
             id={event.id}
@@ -27,8 +28,9 @@ function EventPage() {
             organizer={event.organizer}
           />
         </section>
-      ))}
-    </article>
-  );
-}
+      );
+    })}
+  </article>
+);
+
 export default EventPage;

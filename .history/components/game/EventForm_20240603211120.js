@@ -2,9 +2,9 @@ import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { createEvent, getEvent, updateEvent } from '../api/eventData';
+import { createEvent, getEvent } from '../api/eventData';
 import { getGames } from '../api/gameData';
-import getGamers from '../api/gamerData';
+import { getGamers } from '../api/gamerData';
 
 const initialState = {
   description: '',
@@ -15,6 +15,7 @@ const initialState = {
 };
 
 const EventForm = ({ user }) => {
+  const [event] = useState([]);
   const [games, setGames] = useState([]);
   const [gamers, setGamers] = useState([]);
   const [currentEvent, setCurrentEvent] = useState(initialState);
@@ -53,45 +54,25 @@ const EventForm = ({ user }) => {
   }, [id, user?.uid]); // Dependency array
 
   const handleChange = (e) => {
-    setCurrentEvent((prevEvent) => ({
-      ...prevEvent,
+    setCurrentEvent({
+      ...currentEvent,
       [e.target.name]: e.target.value,
-      // Include 'uid' only if the event is being created (i.e., 'id' is not present)
-      uid: !prevEvent.id ? user?.uid : prevEvent.uid,
-    }));
+    });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const event = {
+    const newEvent = {
       id: currentEvent.id,
       description: currentEvent.description,
       date: currentEvent.date,
       time: currentEvent.time,
       game_id: currentEvent.game_id,
-      organizer_id: currentEvent.organizer_id,
+      organizer_id: currentEvent.gameType,
     };
 
-    if (id) {
-      // If an id is present, update the game
-      updateEvent(id, event)
-        .then(() => {
-          router.push(`/events/${id}`);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    } else {
-      // If no id is present, create a new game
-      createEvent(event)
-        .then(() => {
-          router.push('/event');
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    }
+    createEvent(newEvent).then(() => router.push('/event'));
   };
   return (
     <>
@@ -143,6 +124,3 @@ EventForm.propTypes = {
 };
 
 export default EventForm;
-
-// TODO: FIX VIEW EVENT NOT SHOWING ANYTHING
-// TODO: FIX AFTER EDIT AND CREATION ROUTING

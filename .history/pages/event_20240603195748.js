@@ -16,19 +16,23 @@ function EventPage() {
       <Link href="/events/new" passHref>
         <button type="button">Register New Event</button>
       </Link>
-      {events.map((event) => (
-        <section key={`event--${event.id}`} className="event">
-          <EventCard
-            id={event.id}
-            game={event.game}
-            description={event.description}
-            date={event.date}
-            time={event.time}
-            organizer={event.organizer}
-          />
-        </section>
-      ))}
+      {events.map((event) => {
+        console.warn(`Sending event with id: ${event.id} to EventCard`);
+        return (
+          <section key={`event--${event.id}`} className="event">
+            <EventCard
+              id={event.id}
+              game={event.game}
+              description={event.description}
+              date={event.date}
+              time={event.time}
+              organizer={event.organizer}
+            />
+          </section>
+        );
+      })}
     </article>
   );
 }
+
 export default EventPage;
