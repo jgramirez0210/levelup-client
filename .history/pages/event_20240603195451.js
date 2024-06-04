@@ -17,9 +17,9 @@ function EventPage() {
         <button type="button">Register New Event</button>
       </Link>
       {events.map((event) => (
+        console.warn(`Sending event with id: ${event.id} to EventCard`);
         <section key={`event--${event.id}`} className="event">
           <EventCard
-            id={event.id}
             game={event.game}
             description={event.description}
             date={event.date}
@@ -31,4 +31,5 @@ function EventPage() {
     </article>
   );
 }
+
 export default EventPage;

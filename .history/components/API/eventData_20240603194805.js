@@ -30,9 +30,9 @@ const createEvent = (e) => fetch(`${endpoint}events`, {
     throw error;
   });
 
-// GET SINGLE EVENT
+// GET SINGLE GAMES
 const getEvent = (id) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}events/${id}`, {
+  fetch(`${endpoint}event/${id}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -49,29 +49,5 @@ const getEvent = (id) => new Promise((resolve, reject) => {
     })
     .catch(reject);
 });
-
-// UPDATE EVENT
-const updateEvent = (id, payload) => new Promise((resolve, reject) => {
-  console.warn('payload', payload);
-  fetch(`${endpoint}events/${id}`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(payload),
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      return response.text().then((text) => (text ? JSON.parse(text) : {}));
-    })
-    .then(resolve)
-    .catch(reject);
-});
-
 // eslint-disable-next-line import/prefer-default-export
-export {
-  getEvents, createEvent, getEvent, updateEvent,
-
-};
+export { getEvents, createEvent, getEvent };

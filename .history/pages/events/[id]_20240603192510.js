@@ -28,10 +28,10 @@ export default function Game() {
         <Card.Text>{game.number_of_players} players needed</Card.Text>
       </Card.Body>
       <Card.Footer className="text-muted">Skill Level: {game.skill_level}</Card.Footer>
-      <Link href={`/games/edit/${id}`} passHref>
+      <Link href={`/event/edit/${id}`} passHref>
         <Button>Edit Game</Button>
       </Link>
-      <Link href={`/games/${id}`} passHref>
+      <Link href={`/event/${id}`} passHref>
         <Button>View Game</Button>
       </Link>
     </Card>

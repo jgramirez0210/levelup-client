@@ -25,9 +25,9 @@ export default function Game() {
       <Card.Header>{game.title}</Card.Header>
       <Card.Body>
         <Card.Title>By: {game.maker}</Card.Title>
-        <Card.Text>{game.number_of_players} players needed</Card.Text>
+        <Card.Text>{game.numberOfPlayers} players needed</Card.Text>
       </Card.Body>
-      <Card.Footer className="text-muted">Skill Level: {game.skill_level}</Card.Footer>
+      <Card.Footer className="text-muted">Skill Level: {game.skillLevel}</Card.Footer>
       <Link href={`/games/edit/${id}`} passHref>
         <Button>Edit Game</Button>
       </Link>

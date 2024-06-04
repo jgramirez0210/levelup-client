@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { createEvent, getEvent, updateEvent } from '../api/eventData';
+import { createEvent } from '../api/eventData';
 import { getGames } from '../api/gameData';
 import getGamers from '../api/gamerData';
 
@@ -15,50 +15,34 @@ const initialState = {
 };
 
 const EventForm = ({ user }) => {
-  const [games, setGames] = useState([]);
+  const [game, setGame] = useState([]);
   const [gamers, setGamers] = useState([]);
   const [currentEvent, setCurrentEvent] = useState(initialState);
   const router = useRouter();
-  const { query } = router;
+  const { query } = useRouter;
   const { id } = query;
 
   useEffect(() => {
-    getGames()
-      .then((fetchedGames) => {
-        setGames(fetchedGames);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-
-    getGamers()
-      .then((fetchedGamers) => {
-        setGamers(fetchedGamers); // Corrected from 'fetchGamers' to 'fetchedGamers'
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-
     if (id) {
+      // If an id is present, fetch the game and set it to currentGame
       getEvent(id)
-        .then((fetchedEvent) => {
-          setCurrentEvent(fetchedEvent);
+        .then((event) => {
+          setCurrentEvent(game);
         })
         .catch((error) => {
           console.error(error);
         });
     } else {
+      // If no id is present, set currentGame to initialState
       setCurrentEvent(initialState);
     }
-  }, [id, user?.uid]); // Dependency array
+  }, [id, user.uid]); // Added closing parenthesis here
 
   const handleChange = (e) => {
-    setCurrentEvent((prevEvent) => ({
-      ...prevEvent,
+    setCurrentEvent({
+      ...currentEvent,
       [e.target.name]: e.target.value,
-      // Include 'uid' only if the event is being created (i.e., 'id' is not present)
-      uid: !prevEvent.id ? user?.uid : prevEvent.uid,
-    }));
+    });
   };
 
   const handleSubmit = (e) => {
@@ -70,28 +54,10 @@ const EventForm = ({ user }) => {
       date: currentEvent.date,
       time: currentEvent.time,
       game_id: currentEvent.game_id,
-      organizer_id: currentEvent.organizer_id,
+      organizer_id: currentEvent.gameType,
     };
 
-    if (id) {
-      // If an id is present, update the game
-      updateEvent(id, event)
-        .then(() => {
-          router.push(`/events/${id}`);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    } else {
-      // If no id is present, create a new game
-      createEvent(event)
-        .then(() => {
-          router.push('/event');
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    }
+    createEvent(event).then(() => router.push('/event'));
   };
   return (
     <>
@@ -105,11 +71,11 @@ const EventForm = ({ user }) => {
           <Form.Control type="time" name="time" required value={currentEvent.time} onChange={handleChange} />
           <Form.Label>Game</Form.Label>
           <Form.Select
-            name="game"
-            value={currentEvent.game_id}
+            name="gameType"
+            value={currentEvent.gameType}
             onChange={handleChange}
           >
-            {games.map((gameItem) => (
+            {game.map((gameItem) => (
               <option key={gameItem.id} value={gameItem.id}>
                 {gameItem.title}
               </option>
@@ -118,12 +84,12 @@ const EventForm = ({ user }) => {
           <Form.Label>Organizer</Form.Label>
           <Form.Select
             name="organizer"
-            value={currentEvent.organizer_id}
+            value={currentEvent.organizer}
             onChange={handleChange}
           >
-            {gamers.map((organizerItem) => ( // Use gamers instead of event
-              <option key={organizerItem.id} value={organizerItem.id}>
-                {organizerItem.bio}
+            {gamers.map((gamerItem) => (
+              <option key={gamerItem.id} value={gamerItem.id}>
+                {gamerItem.bio}
               </option>
             ))}
           </Form.Select>
@@ -143,6 +109,3 @@ EventForm.propTypes = {
 };
 
 export default EventForm;
-
-// TODO: FIX VIEW EVENT NOT SHOWING ANYTHING
-// TODO: FIX AFTER EDIT AND CREATION ROUTING

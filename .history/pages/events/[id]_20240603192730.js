@@ -3,37 +3,27 @@ import { useRouter } from 'next/router';
 import { Card, Button } from 'react-bootstrap';
 import Link from 'next/link';
 import { getGame } from '../../components/api/gameData';
+import EventCard from '../../components/EventCard';
 
 export default function Game() {
   const router = useRouter();
   const { id } = router.query;
-  const [game, setGame] = useState(null);
+  const [event, setEvent] = useState(null);
 
   useEffect(() => {
     if (id) {
       getGame(id)
         .then((gameData) => {
-          setGame(gameData);
+          setEvent(gameData);
         })
         .catch((error) => {
           console.error(error);
         });
     }
   }, [id]);
-  return game ? (
+  return event ? (
     <Card className="text-center">
-      <Card.Header>{game.title}</Card.Header>
-      <Card.Body>
-        <Card.Title>By: {game.maker}</Card.Title>
-        <Card.Text>{game.number_of_players} players needed</Card.Text>
-      </Card.Body>
-      <Card.Footer className="text-muted">Skill Level: {game.skill_level}</Card.Footer>
-      <Link href={`/games/edit/${id}`} passHref>
-        <Button>Edit Game</Button>
-      </Link>
-      <Link href={`/games/${id}`} passHref>
-        <Button>View Game</Button>
-      </Link>
+      <EventCard event={event} />
     </Card>
   ) : (
     <div>Loading...</div>

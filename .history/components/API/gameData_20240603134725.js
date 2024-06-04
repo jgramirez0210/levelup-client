@@ -84,16 +84,10 @@ const updateGame = (id, payload) => new Promise((resolve, reject) => {
     },
     body: JSON.stringify(payload),
   })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      return response.text().then((text) => (text ? JSON.parse(text) : {}));
-    })
+    .then((response) => response.json())
     .then(resolve)
     .catch(reject);
 });
-
 // eslint-disable-next-line import/prefer-default-export
 export {
   getGames, createGame, getGameTypes, updateGame, getGame,

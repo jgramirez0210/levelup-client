@@ -86,7 +86,7 @@ const EventForm = ({ user }) => {
       // If no id is present, create a new game
       createEvent(event)
         .then(() => {
-          router.push('/event');
+          router.push('/');
         })
         .catch((error) => {
           console.error(error);
@@ -143,6 +143,3 @@ EventForm.propTypes = {
 };
 
 export default EventForm;
-
-// TODO: FIX VIEW EVENT NOT SHOWING ANYTHING
-// TODO: FIX AFTER EDIT AND CREATION ROUTING
