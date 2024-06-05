@@ -13,7 +13,7 @@ const initialState = {
   number_of_players: '',
   title: '',
   maker: '',
-  game_type: 1,
+  gameType: 1,
 };
 
 // The GameForm component
