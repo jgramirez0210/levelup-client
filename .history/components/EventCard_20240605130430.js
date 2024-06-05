@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Card, Button } from 'react-bootstrap';
 import Link from 'next/link';
-import { deleteEvent } from './api/eventData';
 
 const EventCard = ({
   id,
@@ -14,14 +13,14 @@ const EventCard = ({
   onUpdate,
 }) => {
   const datetime = new Date(`${date}T${time}`);
-
   const deleteThisGame = () => {
-    if (window.confirm(`Delete ${description}?`)) {
+    if (window.confirm(`Delete ${title}?`)) {
       deleteEvent(id).then(() => {
         onUpdate();
       });
     }
   };
+
 
   return (
     <Card className="text-center">
@@ -37,7 +36,7 @@ const EventCard = ({
       <Link href={`/events/${id}`} passHref>
         <Button>View Event</Button>
       </Link>
-      <Button onClick={deleteThisGame}>Delete Event</Button>
+      <Button onClick={deleteThisGame}>Delete Game</Button>
     </Card>
   );
 };
@@ -49,7 +48,6 @@ EventCard.propTypes = {
   time: PropTypes.string.isRequired,
   organizer: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
-  onUpdate: PropTypes.func.isRequired,
 };
 
 export default EventCard;

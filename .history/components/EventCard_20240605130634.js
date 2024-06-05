@@ -37,7 +37,7 @@ const EventCard = ({
       <Link href={`/events/${id}`} passHref>
         <Button>View Event</Button>
       </Link>
-      <Button onClick={deleteThisGame}>Delete Event</Button>
+      <Button onClick={deleteThisGame}>Delete Game</Button>
     </Card>
   );
 };

@@ -2,10 +2,10 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Card, Button } from 'react-bootstrap';
 import Link from 'next/link';
-import { deleteGame } from './api/gameData';
+import { useRouter } from 'next/router';
+import { deleteGame } from './api/gameData'; // Changed from deleteReview
 
 const GameCard = ({
-  id,
   title,
   maker,
   numberOfPlayers,
@@ -34,13 +34,12 @@ const GameCard = ({
       <Link href={`/games/${id}`} passHref>
         <Button>View Game</Button>
       </Link>
-      <Button onClick={deleteThisGame}>Delete Game</Button>
+      <Button onClick={deleteThisGame}>Delete Game</Button> {/* Changed from Delete Review to Delete Game */}
     </Card>
   );
 };
 
 GameCard.propTypes = {
-  id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   maker: PropTypes.string.isRequired,
   numberOfPlayers: PropTypes.string.isRequired,

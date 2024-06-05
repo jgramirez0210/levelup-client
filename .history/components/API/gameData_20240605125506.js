@@ -95,6 +95,7 @@ const updateGame = (id, payload) => new Promise((resolve, reject) => {
 });
 
 // DELETE GAME
+// DELETE GAME
 const deleteGame = (id) => new Promise((resolve, reject) => {
   fetch(`${endpoint}games/${id}`, {
     method: 'DELETE',

@@ -28,7 +28,6 @@ function EventPage() {
             date={event.date}
             time={event.time}
             organizer={event.organizer}
-            onUpdate={() => window.location.reload()}
           />
         </section>
       ))}

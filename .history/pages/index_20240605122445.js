@@ -17,14 +17,7 @@ function Home() {
       <h1>Games</h1>
       {games.map((game) => (
         <section key={`game--${game.id}`} className="game">
-          <GameCard
-            id={game.id.toString()}
-            title={game.title}
-            maker={game.maker}
-            numberOfPlayers={game.number_of_players}
-            skillLevel={game.skill_level}
-            onUpdate={() => window.location.reload()}
-          />
+          <GameCard id={game.id.toString()} title={game.title} maker={game.maker} numberOfPlayers={game.number_of_players} skillLevel={game.skill_level} />
         </section>
       ))}
     </article>

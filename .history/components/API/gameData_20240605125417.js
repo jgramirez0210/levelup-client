@@ -102,17 +102,13 @@ const deleteGame = (id) => new Promise((resolve, reject) => {
       'Content-Type': 'application/json',
     },
   })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      return response.text().then((text) => (text ? JSON.parse(text) : {}));
-    })
+    .then((response) => response.json())
     .then((data) => {
       resolve(data);
     })
     .catch(reject);
 });
+
 // eslint-disable-next-line import/prefer-default-export
 export {
   getGames, createGame, getGameTypes, updateGame, getGame, deleteGame,
