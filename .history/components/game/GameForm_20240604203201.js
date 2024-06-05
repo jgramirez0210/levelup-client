@@ -13,7 +13,7 @@ const initialState = {
   number_of_players: '',
   title: '',
   maker: '',
-  game_type: 1,
+  gameType: 1,
 };
 
 // The GameForm component
@@ -59,10 +59,9 @@ const GameForm = ({ user }) => {
 
   // Function to handle form field changes
   const handleChange = (e) => {
-    const value = e.target.name === 'game_type' ? parseInt(e.target.value, 10) : e.target.value;
     setCurrentGame({
       ...currentGame,
-      [e.target.name]: value,
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -79,7 +78,6 @@ const GameForm = ({ user }) => {
       game_type: currentGame.game_type,
       userId: user.uid,
     };
-    console.warn('game data', game);
 
     if (id) {
       // If an id is present, update the game
