@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { deleteGame } from './api/gameData';
 
 const GameCard = ({
-  id,
   title,
   maker,
   numberOfPlayers,
@@ -34,13 +33,12 @@ const GameCard = ({
       <Link href={`/games/${id}`} passHref>
         <Button>View Game</Button>
       </Link>
-      <Button onClick={deleteThisGame}>Delete Game</Button>
+      <Button onClick={deleteThisGame}>Delete Game</Button> {/* Changed from Delete Review to Delete Game */}
     </Card>
   );
 };
 
 GameCard.propTypes = {
-  id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   maker: PropTypes.string.isRequired,
   numberOfPlayers: PropTypes.string.isRequired,

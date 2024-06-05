@@ -23,6 +23,7 @@ const EventCard = ({
     }
   };
 
+
   return (
     <Card className="text-center">
       <Card.Header>{game}</Card.Header>
@@ -37,7 +38,7 @@ const EventCard = ({
       <Link href={`/events/${id}`} passHref>
         <Button>View Event</Button>
       </Link>
-      <Button onClick={deleteThisGame}>Delete Event</Button>
+      <Button onClick={deleteThisGame}>Delete Game</Button>
     </Card>
   );
 };
@@ -49,7 +50,6 @@ EventCard.propTypes = {
   time: PropTypes.string.isRequired,
   organizer: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
-  onUpdate: PropTypes.func.isRequired,
 };
 
 export default EventCard;

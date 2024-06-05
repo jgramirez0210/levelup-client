@@ -34,7 +34,7 @@ const GameCard = ({
       <Link href={`/games/${id}`} passHref>
         <Button>View Game</Button>
       </Link>
-      <Button onClick={deleteThisGame}>Delete Game</Button>
+      <Button onClick={deleteThisGame}>Delete Game</Button> {/* Changed from Delete Review to Delete Game */}
     </Card>
   );
 };
