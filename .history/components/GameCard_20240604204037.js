@@ -52,4 +52,4 @@ GameCard.propTypes = {
 
 export default GameCard;
 
-//  TODO: need to fix url not routing to game id"
+//TODO: need to fix url not routing to game id"
