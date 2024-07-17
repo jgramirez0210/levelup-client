@@ -56,7 +56,6 @@ const EventForm = ({ user }) => {
     setCurrentEvent((prevEvent) => ({
       ...prevEvent,
       [e.target.name]: e.target.value,
-      // Include 'uid' only if the event is being created (i.e., 'id' is not present)
       uid: !prevEvent.id ? user?.uid : prevEvent.uid,
     }));
   };
@@ -64,12 +63,18 @@ const EventForm = ({ user }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // Basic validation for gameId
+    if (!currentEvent.game_id || Number.isNaN(currentEvent.game_id) || !currentEvent.organizer_id || Number.isNaN(currentEvent.organizer_id)) {
+      alert('Please select a valid game and organizer.');
+      return;
+    }
+
     const event = {
       description: currentEvent.description,
       date: currentEvent.date,
       time: currentEvent.time,
       gameId: currentEvent.game_id,
-      organizer_id: currentEvent.organizer_id,
+      organizerId: currentEvent.organizer_id, // Changed from organizer_id to organizerId to match server expectation
       userId: user?.uid,
     };
 
@@ -99,11 +104,28 @@ const EventForm = ({ user }) => {
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3">
           <Form.Label>Description</Form.Label>
-          <Form.Control name="description" required value={currentEvent.description} onChange={handleChange} />
+          <Form.Control
+            name="description"
+            required
+            value={currentEvent.description}
+            onChange={handleChange}
+          />
           <Form.Label>Date</Form.Label>
-          <Form.Control type="date" name="date" required value={currentEvent.date} onChange={handleChange} />
+          <Form.Control
+            type="date"
+            name="date"
+            required
+            value={currentEvent.date}
+            onChange={handleChange}
+          />
           <Form.Label>Time</Form.Label>
-          <Form.Control type="time" name="time" required value={currentEvent.time} onChange={handleChange} />
+          <Form.Control
+            type="time"
+            name="time"
+            required
+            value={currentEvent.time}
+            onChange={handleChange}
+          />
           <Form.Label>Game</Form.Label>
           <Form.Select
             name="game_id"
