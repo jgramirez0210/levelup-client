@@ -1,7 +1,7 @@
 import EventForm from '../../components/game/EventForm';
 import { useAuth } from '../../utils/context/authContext';
 
-const NewGame = () => {
+function NewGame() {
   const { user } = useAuth();
   return (
     <div>
@@ -9,6 +9,6 @@ const NewGame = () => {
       <EventForm user={user} />
     </div>
   );
-};
+}
 
 export default NewGame;

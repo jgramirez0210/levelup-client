@@ -1,6 +1,5 @@
-import firebase from 'firebase/app';
+import firebase from 'firebase/compat/app';
 import 'firebase/auth';
-import { clientCredentials } from './client';
 
 const checkUser = (uid) => new Promise((resolve, reject) => {
   const url = new URL('checkuser', process.env.NEXT_PUBLIC_DATABASE_URL).href;
@@ -43,7 +42,7 @@ const signOut = () => {
 };
 
 export {
-  signIn, //
+  signIn,
   signOut,
   checkUser,
   registerUser,

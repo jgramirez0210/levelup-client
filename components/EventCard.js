@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { signupEvent, leaveEvent } from './api/eventData';
 import { getCurrentUid } from '../utils/context/authContext';
 
-const EventCard = ({
+function EventCard({
   id,
   description,
   date,
@@ -13,7 +13,7 @@ const EventCard = ({
   organizer,
   onUpdate,
   joined,
-}) => {
+}) {
   const datetime = new Date(`${date}T${time}`);
 
   const handleJoin = () => {
@@ -50,7 +50,7 @@ const EventCard = ({
       )}
     </Card>
   );
-};
+}
 
 EventCard.propTypes = {
   description: PropTypes.string.isRequired,

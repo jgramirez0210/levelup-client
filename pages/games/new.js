@@ -1,7 +1,7 @@
 import GameForm from '../../components/game/GameForm';
 import { useAuth } from '../../utils/context/authContext';
 
-const NewGame = () => {
+function NewGame() {
   const { user } = useAuth();
   return (
     <div>
@@ -9,6 +9,6 @@ const NewGame = () => {
       <GameForm user={user} />
     </div>
   );
-};
+}
 
 export default NewGame;
