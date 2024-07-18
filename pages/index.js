@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { disableReactDevTools } from '@fvilers/disable-react-devtools';
 import GameCard from '../components/GameCard';
 import { getGames } from '../components/api/gameData';
 
@@ -10,9 +9,13 @@ function Home() {
     getGames().then((data) => {
       setGames(data);
     });
-  }, []);
 
-  if (process.env.NODE_ENV === 'production') disableReactDevTools();
+    if (process.env.NODE_ENV === 'production') {
+      import('@fvilers/disable-react-devtools').then(({ disableReactDevTools }) => {
+        disableReactDevTools();
+      });
+    }
+  }, []);
 
   return (
     <article className="games">
