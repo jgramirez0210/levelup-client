@@ -1,20 +1,14 @@
-# React/Next.js Django Auth Template
+# LEVEL UP: YOUR ULTIMATE GAMING PLATFORM
+Level Up is the premier destination for gamers looking to unleash their creativity and connect with like-minded enthusiasts. Our platform empowers you to create new games, organize events, and join a vibrant community of gamers from around the world.
 
-## Topics
-- [Get Started](#getting-started)
-- [Starting the Project](#starting-the-project)
-___
-## Getting Started
-### Use Template
-#### 1. To get started, click the GREEN "Use this Template" button at the top of the repo
-<img width="915" alt="Screen Shot 2022-07-06 at 12 54 01 PM" src="https://user-images.githubusercontent.com/29741570/177612998-4aac9237-5a1e-4f13-8ae0-468587521564.png">
+# FEATURES
+- Game Creation and Management: Gamers can create games, specifying the game type from a predefined list. They can update or delete their games, reflecting the one-to-many relationship between Gamer and Game.
 
-#### 2. Make sure YOUR github account is selected in the dropdown and name your project
-<img width="763" alt="Screen Shot 2022-07-06 at 12 54 48 PM" src="https://user-images.githubusercontent.com/29741570/177613126-dd38f678-7553-4f27-8a4a-75680f14d71e.png">
+- Event Creation and Management: Gamers can organize events for games, indicating their role as the organizer. This feature leverages the one-to-many relationship between Gamer (as organizers) and Event.
 
-#### 3. Clone your new repo to your local machine
-#### 4. Go to the **NEXT** section
+- Event Participation: Gamers can sign up for events, showcasing the many-to-many relationship between Gamer and Event through the EventGamer join table. This feature would include the ability to join or leave an event.
 
+# PROJECT SETUP INSTRUCTIONS FOR FIRST TIME INSTALLATION
 ## Starting the Project
 1. Create a Firebase project and set up authentication. Use [these videos](https://vimeo.com/showcase/codetracker-firebase) as a refresher if needed.
 1. Create a `.env` file at the root of the project
@@ -32,13 +26,13 @@ ___
 
 You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 
-**NOTES:** 
-- If you see the following error, you did not follow all the setup steps correctly and failed to add your Firebase creds. Go back and do that NOW.
+# TECH / FRAMEWORK USED
+- ![ERD](assets/erd.png "Screenshot 2024-07-17") 
+- [API Documentation](https://documenter.getpostman.com/view/29856352/2sA3kSo3i8)
 
-<img width="1043" alt="Screen Shot 2022-07-06 at 11 18 45 AM" src="https://user-images.githubusercontent.com/29741570/177612501-c2628f18-4bbd-4de9-aae6-27ffba1172d6.png">
-        
-## Learn More about Next.js
-To learn more about Next.js, take a look at the following resources:
+### BUILT WITH  
+- React
+- Django
+- SQL
+- Firebase
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
