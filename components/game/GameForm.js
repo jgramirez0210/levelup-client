@@ -17,7 +17,7 @@ const initialState = {
 };
 
 // The GameForm component
-const GameForm = ({ user }) => {
+function GameForm({ user }) {
   // State for game types and the current game
   const [gameTypes, setGameTypes] = useState([]);
   const [currentGame, setCurrentGame] = useState(initialState);
@@ -100,64 +100,61 @@ const GameForm = ({ user }) => {
         });
     }
   };
+
   return (
-    <>
-      <Form onSubmit={handleSubmit}>
-        <h2 className="text-white mt-5">{currentGame.id ? 'Update' : 'Create'} Game</h2>
+    <Form onSubmit={handleSubmit}>
+      <h2 className="text-white mt-5">{currentGame.id ? 'Update' : 'Create'} Game</h2>
+      <Form.Group className="mb-3">
+        <Form.Label>Title</Form.Label>
+        <Form.Control
+          name="title"
+          value={currentGame.title}
+          onChange={handleChange}
+          required
+        />
+        <Form.Label>Game Type</Form.Label>
+        <Form.Select
+          name="game_type"
+          value={currentGame.game_type}
+          onChange={handleChange}
+        >
+          {gameTypes.map((type) => (
+            <option key={type.id} value={type.id}>
+              {type.label}
+            </option>
+          ))}
+        </Form.Select>
 
-        <Form.Group className="mb-3">
-          <Form.Label>Title</Form.Label>
-          <Form.Control
-            name="title"
-            value={currentGame.title}
-            onChange={handleChange}
-            required
-          />
+        <Form.Label>Maker</Form.Label>
+        <Form.Control
+          name="maker"
+          value={currentGame.maker}
+          onChange={handleChange}
+          required
+        />
 
-          <Form.Label>Game Type</Form.Label>
-          <Form.Select
-            name="game_type"
-            value={currentGame.game_type}
-            onChange={handleChange}
-          >
-            {gameTypes.map((type) => (
-              <option key={type.id} value={type.id}>
-                {type.label}
-              </option>
-            ))}
-          </Form.Select>
+        <Form.Label>Number of Players</Form.Label>
+        <Form.Control
+          name="number_of_players"
+          value={currentGame.number_of_players}
+          onChange={handleChange}
+          required
+        />
 
-          <Form.Label>Maker</Form.Label>
-          <Form.Control
-            name="maker"
-            value={currentGame.maker}
-            onChange={handleChange}
-            required
-          />
-
-          <Form.Label>Number of Players</Form.Label>
-          <Form.Control
-            name="number_of_players"
-            value={currentGame.number_of_players}
-            onChange={handleChange}
-            required
-          />
-
-          <Form.Label>Skill Level </Form.Label>
-          <Form.Control
-            name="skill_level"
-            value={currentGame.skill_level}
-            onChange={handleChange}
-            required
-          />
-        </Form.Group>
-        <Button variant="primary" type="submit">
-          Submit!
-        </Button>
-      </Form>
-    </>
+        <Form.Label>Skill Level</Form.Label>
+        <Form.Control
+          name="skill_level"
+          value={currentGame.skill_level}
+          onChange={handleChange}
+          required
+        />
+      </Form.Group>
+      <Button variant="primary" type="submit">
+        Submit!
+      </Button>
+    </Form>
   );
-};
+}
 
 // Prop types for the GameForm component
 GameForm.propTypes = {

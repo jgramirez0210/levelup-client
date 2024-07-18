@@ -14,7 +14,7 @@ const initialState = {
   organizer_id: '',
 };
 
-const EventForm = ({ user }) => {
+function EventForm({ user }) {
   const [games, setGames] = useState([]);
   const [gamers, setGamers] = useState([]);
   const [currentEvent, setCurrentEvent] = useState(initialState);
@@ -63,7 +63,6 @@ const EventForm = ({ user }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Basic validation for gameId
     if (!currentEvent.game_id || Number.isNaN(currentEvent.game_id) || !currentEvent.organizer_id || Number.isNaN(currentEvent.organizer_id)) {
       alert('Please select a valid game and organizer.');
       return;
@@ -74,7 +73,7 @@ const EventForm = ({ user }) => {
       date: currentEvent.date,
       time: currentEvent.time,
       gameId: currentEvent.game_id,
-      organizerId: currentEvent.organizer_id, // Changed from organizer_id to organizerId to match server expectation
+      organizerId: currentEvent.organizer_id,
       userId: user?.uid,
     };
 
@@ -100,68 +99,65 @@ const EventForm = ({ user }) => {
   };
 
   return (
-    <>
-      <Form onSubmit={handleSubmit}>
-        <Form.Group className="mb-3">
-          <Form.Label>Description</Form.Label>
-          <Form.Control
-            name="description"
-            required
-            value={currentEvent.description}
-            onChange={handleChange}
-          />
-          <Form.Label>Date</Form.Label>
-          <Form.Control
-            type="date"
-            name="date"
-            required
-            value={currentEvent.date}
-            onChange={handleChange}
-          />
-          <Form.Label>Time</Form.Label>
-          <Form.Control
-            type="time"
-            name="time"
-            required
-            value={currentEvent.time}
-            onChange={handleChange}
-          />
-          <Form.Label>Game</Form.Label>
-          <Form.Select
-            name="game_id"
-            value={currentEvent.game_id}
-            onChange={handleChange}
-          >
-            {games.map((gameItem) => (
-              <option
-                key={gameItem.id}
-                value={gameItem.id}
-              >
-                {gameItem.title}
-              </option>
-            ))}
-          </Form.Select>
-          <Form.Label>Organizer</Form.Label>
-          <Form.Select
-            name="organizer_id"
-            value={currentEvent.organizer_id}
-            onChange={handleChange}
-          >
-            {gamers.map((organizerItem) => (
-              <option key={organizerItem.id} value={organizerItem.id}>
-                {organizerItem.bio}
-              </option>
-            ))}
-          </Form.Select>
-        </Form.Group>
-        <Button variant="primary" type="submit">
-          Submit!
-        </Button>
-      </Form>
-    </>
+    <Form onSubmit={handleSubmit}>
+      <Form.Group className="mb-3">
+        <Form.Label>Description</Form.Label>
+        <Form.Control
+          name="description"
+          required
+          value={currentEvent.description}
+          onChange={handleChange}
+        />
+        <Form.Label>Date</Form.Label>
+        <Form.Control
+          type="date"
+          name="date"
+          required
+          value={currentEvent.date}
+          onChange={handleChange}
+        />
+        <Form.Label>Time</Form.Label>
+        <Form.Control
+          type="time"
+          name="time"
+          required
+          value={currentEvent.time}
+          onChange={handleChange}
+        />
+        <Form.Label>Game</Form.Label>
+        <Form.Select
+          name="game_id"
+          value={currentEvent.game_id}
+          onChange={handleChange}
+        >
+          {games.map((gameItem) => (
+            <option
+              key={gameItem.id}
+              value={gameItem.id}
+            >
+              {gameItem.title}
+            </option>
+          ))}
+        </Form.Select>
+        <Form.Label>Organizer</Form.Label>
+        <Form.Select
+          name="organizer_id"
+          value={currentEvent.organizer_id}
+          onChange={handleChange}
+        >
+          {gamers.map((organizerItem) => (
+            <option key={organizerItem.id} value={organizerItem.id}>
+              {organizerItem.bio}
+            </option>
+          ))}
+        </Form.Select>
+      </Form.Group>
+      <Button variant="primary" type="submit">
+        Submit!
+      </Button>
+    </Form>
   );
-};
-
+}
 EventForm.propTypes = {
   user: PropTypes.shape({
     uid: PropTypes.string.isRequired,

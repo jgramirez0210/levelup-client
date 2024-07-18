@@ -4,14 +4,14 @@ import { Card, Button } from 'react-bootstrap';
 import Link from 'next/link';
 import { deleteGame } from './api/gameData';
 
-const GameCard = ({
+function GameCard({
   id,
   title,
   maker,
   numberOfPlayers,
   skillLevel,
   onUpdate,
-}) => {
+}) {
   const deleteThisGame = () => {
     if (window.confirm(`Delete ${title}?`)) {
       deleteGame(id).then(() => {
@@ -37,7 +37,7 @@ const GameCard = ({
       <Button onClick={deleteThisGame}>Delete Game</Button>
     </Card>
   );
-};
+}
 
 GameCard.propTypes = {
   id: PropTypes.string.isRequired,

@@ -10,11 +10,9 @@ function Home() {
       setGames(data);
     });
 
-    if (process.env.NODE_ENV === 'production') {
-      import('@fvilers/disable-react-devtools').then(({ disableReactDevTools }) => {
-        disableReactDevTools();
-      });
-    }
+    import('@fvilers/disable-react-devtools').then(({ disableReactDevTools }) => {
+      disableReactDevTools();
+    });
   }, []);
 
   return (

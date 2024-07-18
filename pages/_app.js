@@ -2,7 +2,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/globals.css';
 import { Routes, Route, BrowserRouter as Router } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react'; // Import useMemo from 'react'
 import { AuthProvider } from '../utils/context/authContext';
 import ViewDirectorBasedOnUserAuthStatus from '../utils/ViewDirector';
 import UserContext from '../utils/context/UserContext';
@@ -11,6 +11,7 @@ import EventPage from './event';
 function MyApp({ Component, pageProps }) {
   const [user, setUser] = useState(null);
   const [isMounted, setIsMounted] = useState(false);
+
   const login = (userData) => {
     setUser(userData);
   };
@@ -23,9 +24,12 @@ function MyApp({ Component, pageProps }) {
     setIsMounted(true);
   }, []);
 
+  // Use useMemo to memoize the context value
+  const providerValue = useMemo(() => ({ user, login, logout }), [user]);
+
   return (
     <AuthProvider>
-      <UserContext.Provider value={{ user, login, logout }}>
+      <UserContext.Provider value={providerValue}>
         {isMounted && (
           <Router>
             <Routes>
@@ -33,9 +37,6 @@ function MyApp({ Component, pageProps }) {
               {/* Add more routes as needed */}
             </Routes>
             <ViewDirectorBasedOnUserAuthStatus
-              // if status is pending === loading
-              // if status is logged in === view app
-              // if status is logged out === sign in page
               component={Component}
               pageProps={pageProps}
             />
