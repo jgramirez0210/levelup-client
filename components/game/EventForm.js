@@ -33,7 +33,7 @@ function EventForm({ user }) {
 
     getGamers()
       .then((fetchedGamers) => {
-        setGamers(fetchedGamers); // Corrected from 'fetchGamers' to 'fetchedGamers'
+        setGamers(fetchedGamers);
       })
       .catch((error) => {
         console.error(error);
